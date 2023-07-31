@@ -11,4 +11,8 @@ Steps:
 - Two repo (dev and prod)
 - use github environment options to push image to ECR
 
+### How GitHub OIDC works with AWS IAM 
+- Image Source [Link](https://www.codecentric.de/wissens-hub/blog/secretless-connections-from-github-actions-to-aws-using-oidc)
+
 ![image](https://github.com/shamimice03/github-actions-lab/assets/19708705/3cb418a0-20d5-4973-b350-ef5977735217)
+
