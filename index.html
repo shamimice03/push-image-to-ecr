@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Albums</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .album-list {
+            list-style: none;
+            padding: 0;
+        }
+        .album-item {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Album</h1>
+    <form id="newAlbumForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+
+        <label for="artist">Artist:</label>
+        <input type="text" id="artist" required>
+
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" id="price" required>
+
+        <button type="submit">Add Album</button>
+    </form>
+
+        <h1>Record Albums</h1>
+    <ul class="album-list" id="albumList">
+        <!-- Albums will be dynamically added here -->
+    </ul>
+
+    <script>
+        // Function to display albums on the webpage
+        function displayAlbums(albums) {
+            const albumList = document.getElementById("albumList");
+            albumList.innerHTML = "";
+
+            albums.forEach(album => {
+                const albumItem = document.createElement("li");
+                albumItem.className = "album-item";
+
+                const title = document.createElement("h3");
+                title.textContent = album.title;
+                albumItem.appendChild(title);
+
+                const artist = document.createElement("p");
+                artist.textContent = "Artist: " + album.artist;
+                albumItem.appendChild(artist);
+
+                const price = document.createElement("p");
+                price.textContent = "Price: $" + album.price.toFixed(2);
+                albumItem.appendChild(price);
+
+                albumList.appendChild(albumItem);
+            });
+        }
+
+        // Function to add a new album
+        function addAlbum() {
+            const title = document.getElementById("title").value;
+            const artist = document.getElementById("artist").value;
+            const price = parseFloat(document.getElementById("price").value);
+
+            const newAlbum = { title, artist, price };
+
+            fetch('/albums', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newAlbum)
+            })
+            .then(response => response.json())
+            .then(album => {
+                // Clear the form after successful addition
+                document.getElementById("newAlbumForm").reset();
+                // Refresh the album list
+                fetchAlbums();
+            });
+        }
+
+        // Function to fetch albums from the server
+        function fetchAlbums() {
+            fetch('/albums')
+                .then(response => response.json())
+                .then(albums => displayAlbums(albums));
+        }
+
+        // Event listener for form submission
+        document.getElementById("newAlbumForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            addAlbum();
+        });
+
+        // Initial fetch to load albums on page load
+        fetchAlbums();
+    </script>
+</body>
+</html>
