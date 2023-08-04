@@ -2,10 +2,13 @@ name: Build and Push Image to ECR
 
 on: 
   push:
+    branches:
+        - dev
   workflow_dispatch:
 
 jobs:
-  aws_access_test:
+  build_and_push_image:
+    environment: Development
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:

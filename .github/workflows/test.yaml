@@ -1,0 +1,44 @@
+name: Build and Push Image to ECR
+
+on:
+    workflow_dispatch:
+
+jobs:
+  check_dev_repo_variables: 
+    environment: Development
+    runs-on: ubuntu-latest
+    steps:
+        - name: test 
+          run: |
+           echo ${{ vars.DEV_ECR_REPO }}
+  check_prod_repo_variables: 
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+        - name: test 
+          run: |
+           echo ${{ vars.PROD_ECR_REPO }}            
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download Code
+  #       uses: actions/checkout@v3
+  #     - name: Set Up Golang
+  #       uses: actions/setup-go@v4
+  #       with:
+  #         go-version-file: go.mod
+  #     - name: Run Test
+  #       run: go test -v .
+   
+  # build:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #     - name: Download Code
+  #       uses: actions/checkout@v3
+  #     - name: Set up Golang
+  #       uses: actions/setup-go@v4
+  #       with:
+  #         go-version: '1.20'
+  #     - name: Build
+  #       run: go build -v .
