@@ -1,0 +1,33 @@
+name: testing
+
+on: 
+    push:
+      branches:
+        - dev
+    workflow_dispatch:
+
+jobs:
+  check_dev_repo_variables: 
+    environment: Development
+    runs-on: ubuntu-latest
+    steps:
+        - name: Dev ECR repo  
+          id: dev_check
+          env:
+            platform: dev
+          run: |
+           echo ${{ vars.DEV_ECR_REPO }}
+           PLATFORM=${{ env.platform }}
+           echo $PLATFORM
+           echo "my $PLATFORM"
+        - name: Access Env from Prior Step
+          run: |
+            echo "my $PLATFORM"
+  check_prod_repo_variables: 
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+        - name: Prod_ECR_repo
+          run: |
+           echo ${{ vars.PROD_ECR_REPO }}     
+
