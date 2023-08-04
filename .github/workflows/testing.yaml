@@ -17,7 +17,7 @@ jobs:
             platform: dev
           run: |
            echo ${{ vars.DEV_ECR_REPO }}
-           PLATFORM=$platform
+           PLATFORM=${{ env.platform }}
         - name: Access Env from Prior Step
           run: |
             echo "my $PLATFORM"
