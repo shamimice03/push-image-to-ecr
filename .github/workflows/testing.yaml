@@ -1,6 +1,9 @@
 name: testing
 
-on:
+on: 
+    push:
+      branches:
+        - dev
     workflow_dispatch:
 
 jobs:
