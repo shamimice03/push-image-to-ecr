@@ -1,4 +1,4 @@
-name: Build and Push Image to ECR
+name: Test Variable Access
 
 on:
     workflow_dispatch:
