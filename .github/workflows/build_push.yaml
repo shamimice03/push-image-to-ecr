@@ -17,7 +17,7 @@ jobs:
         - name: Set up Golang
           uses: actions/setup-go@v4
           with:
-            go-version: go.mod
+            go-version-file: go.mod
         - name: Configure AWS credentials 
           uses: aws-actions/configure-aws-credentials@v2
           with:
