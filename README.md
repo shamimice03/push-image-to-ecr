@@ -78,3 +78,19 @@ Steps:
 ```
  if: github.event.pull_request.merged == true || github.event_name == 'push'
 ```
+
+
+```
+sequenceDiagram
+    autonumber
+    participant A as Github Actions
+    participant B as Oidc Provider
+    participant C as AWS IAM
+
+    A->>+B: Request JWT
+    B->>-A: Issue signed JWT
+    A->>+C: Request Access Token
+    C-->>+B: Verify Token
+    B-->>-C: Valid
+    C->>-A: Issue Role Access Session Token
+```
