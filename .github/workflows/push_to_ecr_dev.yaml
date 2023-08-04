@@ -53,9 +53,10 @@ jobs:
             REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             REPOSITORY: ${{ vars.DEV_ECR_REPO }}
             IMAGE_TAG: ${{ github.sha }}
+            IMAGE_REF: ${{ steps.login-ecr.outputs.registry }}/${{ vars.DEV_ECR_REPO }}:${{ github.sha }}
           uses: aquasecurity/trivy-action@master
           with:
-              image-ref: ${{ steps.login-ecr.outputs.registry }}/ ${{ vars.DEV_ECR_REPO }}:${{ github.sha }}
+              image-ref: ${{ env.IMAGE_REF }}
               format: 'table'
               exit-code: '1'
               ignore-unfixed: true
