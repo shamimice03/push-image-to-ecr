@@ -17,9 +17,10 @@ jobs:
             platform: dev
           run: |
            echo ${{ vars.DEV_ECR_REPO }}
+           PLATFORM=$platform
         - name: Access Env from Prior Step
           run: |
-            echo "my $platform"
+            echo "my $PLATFORM"
   check_prod_repo_variables: 
     environment: Production
     runs-on: ubuntu-latest
