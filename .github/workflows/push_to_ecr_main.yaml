@@ -11,10 +11,10 @@ on:
 
 jobs:
   if_merged_push_image:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     environment: Production
     runs-on: ubuntu-latest
-    
+
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
         id-token: write
