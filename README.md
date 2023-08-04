@@ -73,3 +73,8 @@ Steps:
     ]
 }
 ```
+
+
+```
+ if: github.event.pull_request.merged == true || github.event_name == 'push'
+```
