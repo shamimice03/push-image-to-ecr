@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_and_push_image:
-    environment: Development
+    environment: Production
     runs-on: ubuntu-latest
 
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
