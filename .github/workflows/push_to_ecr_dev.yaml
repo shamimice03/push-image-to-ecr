@@ -47,12 +47,10 @@ jobs:
             IMAGE_TAG: ${{ github.sha }}
           run: |
             docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+            echo "IMAGE_REF=${{ steps.login-ecr.outputs.registry }}/${{ vars.DEV_ECR_REPO }}:${{ github.sha }}" >> $GITHUB_ENV
         
         - name: Run Trivy vulnerability scanner
           env:
-            REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            REPOSITORY: ${{ vars.DEV_ECR_REPO }}
-            IMAGE_TAG: ${{ github.sha }}
             IMAGE_REF: ${{ steps.login-ecr.outputs.registry }}/${{ vars.DEV_ECR_REPO }}:${{ github.sha }}
           uses: aquasecurity/trivy-action@master
           with:
@@ -69,6 +67,6 @@ jobs:
               REPOSITORY: ${{ vars.DEV_ECR_REPO }}
               IMAGE_TAG: ${{ github.sha }}
           run: |
-              docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG    
+              docker push $IMAGE_REF
  
             
