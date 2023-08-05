@@ -18,11 +18,11 @@ jobs:
           run: |
            echo ${{ vars.DEV_ECR_REPO }}
            PLATFORM=${{ env.platform }}
-           echo $PLATFORM
-           echo "my $PLATFORM"
+           echo "TEST=$PLATFORM" >>  $GITHUB_ENV
+           
         - name: Access Env from Prior Step
           run: |
-            echo "my $PLATFORM"
+            echo "my $TEST"
   check_prod_repo_variables: 
     environment: Production
     runs-on: ubuntu-latest
