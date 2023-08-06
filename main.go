@@ -33,7 +33,6 @@ func main() {
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
 
-	router.StaticFile("/", "index.html")
 	fmt.Println("Starting HTTP Server on port 8080")
 	router.Run("localhost:8080")
 }

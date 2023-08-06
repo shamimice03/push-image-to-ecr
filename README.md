@@ -1,15 +1,5 @@
 Steps:
 
-1. OIDC -> AWS
-2. Secrets ->
-3. TEST ECR Connection
-
-- Two IAM Role 
-- Two different policy for dev and prod repo 
-- create two branch (dev and main)
-- validation test on connection with aws 
-- Two repo (dev and prod) *
-- use github environment options to push image to ECR
 
 ### How GitHub OIDC works with AWS IAM 
 - Image Source [Link](https://www.codecentric.de/wissens-hub/blog/secretless-connections-from-github-actions-to-aws-using-oidc)
@@ -93,4 +83,18 @@ sequenceDiagram
     C-->>+B: Verify Token
     B-->>-C: Valid
     C->>-A: Issue Role Access Session Token
+```
+
+
+```
+ aws ecr describe-repositories
+ 
+ aws ecr get-login-password --region ap-northeast-1 | sudo docker login --username AWS --password-stdin 391178969547.dkr.ecr.ap-northeast-1.amazonaws.com/cloudterms-prod
+ 
+ sudo docker pull 391178969547.dkr.ecr.ap-northeast-1.amazonaws.com/cloudterms-prod:6591809cfd585396a8769dcfda95a8ed9624f798
+
+ sudo docker images
+
+ docker run -d -p 8080:8080 --network=host 391178969547.dkr.ecr.ap-northeast-1.amazonaws.com/cloudterms-prod:6591809cfd585396a8769dcfda95a8ed9624f798
+
 ```
