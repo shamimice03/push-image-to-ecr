@@ -104,7 +104,9 @@ jobs:
          ls -la
       - name: Modify files
         run: |
-          sed -i "s+image: .*+image: ${{ needs.build_and_push_image.outputs.image_ref }}+g" webapp-deployment.yaml
+          cat webapp-deployment.yaml
+          sed -i "s+image: .*+image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.DEV_ECR_REPO }}:${{ github.sha }}+g" webapp-deployment.yaml
+          cat webapp-deployment.yaml
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git status
