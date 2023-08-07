@@ -62,4 +62,8 @@ jobs:
           cat webapp-deployment.yaml
           git config user.email shamim@gmail.com
           git config user.name shamim
+          git status
+          git add .
+          git commit -m "Image changed by Github Actions - Job change manifest: ${{ github.run_number }}"
+          git push -u origin main
 
