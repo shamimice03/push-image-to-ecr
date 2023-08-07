@@ -85,6 +85,14 @@ sequenceDiagram
     C->>-A: Issue Role Access Session Token
 ```
 
+### ECR
+```
+Registry: An ECR registry is provided to each AWS account; we can create image repositories in our registry and store images in them.
+Repository: An ECR image repository contains our Docker images.
+Repository policy: We can control access to our repositories and the images within them with repository policies.
+Authorization token: Our Docker client must authenticate to Amazon ECR registries as an AWS user before it can push and pull images. The AWS CLI get-login command provides us with authentication credentials to pass to Docker.
+Image: We can push and pull container images to our repositories.
+```
 
 ```
  aws ecr describe-repositories
