@@ -56,15 +56,12 @@ jobs:
         run: |
          ls -la
       - name: Modify files
-        env:
-          git_email: ${{ secrets.USER_EMAIL }}
-          git_user: ${{ secrets.USERNAME }}
         run: |
           cat webapp-deployment.yaml
           sed -i "s+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}+g" webapp-deployment.yaml
           cat webapp-deployment.yaml
-          git config user.email $git_email
-          git config user.name $git_user
+          git config user.email "${{ secrets.USER_EMAIL }}"
+          git config user.name "${{ secrets.USERNAME }}"          
           git status
           git add .
           git commit -m "Image changed by Github Actions - Job change manifest: ${{ github.run_number }}"
