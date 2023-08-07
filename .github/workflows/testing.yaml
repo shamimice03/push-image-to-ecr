@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 'shamimice03/argo-cd-repo'
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.APP_CONFIG_REPO }}
       - name: View files
         run: |
           ls -la
