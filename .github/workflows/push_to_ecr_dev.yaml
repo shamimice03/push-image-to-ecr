@@ -105,7 +105,7 @@ jobs:
       - name: Modify files
         run: |
           cat webapp-deployment.yaml
-          sed -i "s+image: .*+image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com//${{ secrets.DEV_ECR_REPO }}:${{ github.sha }}+g" webapp-deployment.yaml
+          sed -i "s+image: .*+image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ vars.DEV_ECR_REPO }}:${{ github.sha }}+g" webapp-deployment.yaml
           cat webapp-deployment.yaml
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
