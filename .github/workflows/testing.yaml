@@ -30,4 +30,16 @@ jobs:
         - name: Prod_ECR_repo
           run: |
            echo ${{ vars.PROD_ECR_REPO }}     
+  
+  repo_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/checkout@v3
+        with:
+          repository: 'shamimice03/argo-cd-repo'
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+      - name: view files
+        run: |
+          ls -la
 
