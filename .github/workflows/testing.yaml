@@ -56,7 +56,7 @@ jobs:
       - name: Modify files
         run: |
           cat webapp-deployment.yaml
-          sed -i 's+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}' webapp-deployment.yaml
+          sed -i "s+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}+g" webapp-deployment.yaml
 
 
 
