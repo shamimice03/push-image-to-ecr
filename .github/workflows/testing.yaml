@@ -63,8 +63,7 @@ jobs:
           cat webapp-deployment.yaml
           sed -i "s+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}+g" webapp-deployment.yaml
           cat webapp-deployment.yaml
-          git config --global user.email "$USER_EMAIL"
-          git config --global user.name "$USERNAME"       
+          echo $USER_EMAIL   
           git status
           git add .
           git commit -m "Image changed by Github Actions - Job change manifest: ${{ github.run_number }}"
