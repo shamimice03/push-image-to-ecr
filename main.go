@@ -24,15 +24,16 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "ping",
+			"message": "pong",
 		})
 	})
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
 
+	router.StaticFile("/", "index.html")
 	fmt.Println("Starting HTTP Server on port 8080")
 	router.Run(":8080")
 }
