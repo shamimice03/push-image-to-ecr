@@ -58,6 +58,6 @@ jobs:
           cat webapp-deployment.yaml
           sed -i "s+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}+g" webapp-deployment.yaml
           cat webapp-deployment.yaml
-          git config user.email ${{ secrets.USER_EMAIL }}
-          git config user.name ${{ secrets.USERNAME }}
+          git config user.email shamim@gmail.com
+          git config user.name shamim
 
