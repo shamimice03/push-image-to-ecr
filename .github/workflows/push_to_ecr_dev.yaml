@@ -94,9 +94,26 @@ jobs:
     needs: ["build_and_push_image"]
     if: success()
     steps:
-      - name: Download Code
+      - name: Download code
         uses: actions/checkout@v3
         with:
-          repository: 
+          repository: 'shamimice03/argo-cd-repo'
+          token: ${{ secrets.APP_CONFIG_REPO }}
+      - name: View files
+        run: |
+         ls -la
+      - name: Modify files
+        run: |
+          cat webapp-deployment.yaml
+          sed -i "s+image: .*+image: ${{ needs.build_and_push_image.outputs.image_ref }}+g" webapp-deployment.yaml
+          cat webapp-deployment.yaml
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git status
+          git add .
+          git commit -m "Image changed by Github Actions - Run Number: ${{ github.run_number }}"
+          git push -u origin main
+
+
 
             
