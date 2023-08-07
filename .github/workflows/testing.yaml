@@ -55,8 +55,6 @@ jobs:
          ls -la
       - name: Modify files
         run: |
-          git config user.email ${{ secrets.USER_EMAIL }}
-          git config user.name ${{ secrets.USERNAME }}
           cat webapp-deployment.yaml
           sed -i 's+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}' webapp-deployment.yaml
 

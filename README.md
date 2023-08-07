@@ -110,3 +110,8 @@ sequenceDiagram
  docker run -d -p 8080:8080 --network=host 391178969547.dkr.ecr.ap-northeast-1.amazonaws.com/cloudterms-prod:6591809cfd585396a8769dcfda95a8ed9624f798
 
 ```
+
+```
+          git config user.email ${{ secrets.USER_EMAIL }}
+          git config user.name ${{ secrets.USERNAME }}
+```
