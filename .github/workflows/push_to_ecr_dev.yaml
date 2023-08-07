@@ -30,9 +30,6 @@ jobs:
     environment: Development
     runs-on: ubuntu-latest
 
-    outputs: 
-      image_ref: ${{steps.env-setup.outputs.IMAGE_REF}}
-
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
         id-token: write
@@ -59,7 +56,6 @@ jobs:
           uses: aws-actions/amazon-ecr-login@v1
 
         - name: Setting up environment variables
-          id: env-setup
           env:
             REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             REPOSITORY: ${{ vars.DEV_ECR_REPO }}
@@ -99,12 +95,10 @@ jobs:
         with:
           repository: 'shamimice03/argo-cd-repo'
           token: ${{ secrets.APP_CONFIG_REPO }}
-      - name: View files
-        run: |
-         ls -la
       - name: Modify files
         run: |
           cat webapp-deployment.yaml
+          echo ${{ vars.DEV_ECR_REPO }}
           sed -i "s+image: .*+image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ vars.DEV_ECR_REPO }}:${{ github.sha }}+g" webapp-deployment.yaml
           cat webapp-deployment.yaml
           git config --global user.name "${GITHUB_ACTOR}"
