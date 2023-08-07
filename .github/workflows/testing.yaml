@@ -50,13 +50,15 @@ jobs:
         with:
           repository: 'shamimice03/argo-cd-repo'
           token: ${{ secrets.APP_CONFIG_REPO }}
-
       - name: View files
         run: |
-          ls -la
+         ls -la
+      - name: Modify files
+        run: |
           git config user.email ${{ secrets.USER_EMAIL }}
           git config user.name ${{ secrets.USERNAME }}
-          sed -i 's+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}' webapp-deployment.yaml
           cat webapp-deployment.yaml
+          sed -i 's+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}' webapp-deployment.yaml
+
 
 
