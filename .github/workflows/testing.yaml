@@ -57,6 +57,7 @@ jobs:
         run: |
           cat webapp-deployment.yaml
           sed -i "s+image: .*+image: ${{ needs.env_setup.outputs.image_ref }}+g" webapp-deployment.yaml
+          cat webapp-deployment.yaml
 
 
 
