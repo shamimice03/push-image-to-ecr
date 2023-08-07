@@ -3,11 +3,12 @@ name: Repo Testing
 on: 
     push:
       branches:
-        - dev
+        - main
     workflow_dispatch:
 
 jobs:
   check_dev_repo_variables: 
+    if: github.ref == 'refs/heads/dev'
     environment: Development
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +25,7 @@ jobs:
           run: |
             echo "my $TEST"
   check_prod_repo_variables: 
+    if: github.ref == 'refs/heads/main'
     environment: Production
     runs-on: ubuntu-latest
     steps:
