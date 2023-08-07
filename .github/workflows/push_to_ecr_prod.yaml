@@ -3,7 +3,7 @@ name: Build and Push Image to ECR Prod Repo
 on: 
   push:
     branches: 
-      - main
+      - dev
     paths-ignore:
         - '**/README.md'
   pull_request:

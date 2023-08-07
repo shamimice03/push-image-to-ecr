@@ -39,6 +39,7 @@ jobs:
         with:
           repository: 'shamimice03/argo-cd-repo'
           token: ${{ secrets.APP_CONFIG_REPO }}
+          
       - name: View files
         run: |
           ls -la
